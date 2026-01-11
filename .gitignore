@@ -1,0 +1,8 @@
+dataset/
+.env
+*.csv
+eden_prueba_tecnica.egg-info/
+__pycache__/
+.venv
+*.json
+.DS_Store
