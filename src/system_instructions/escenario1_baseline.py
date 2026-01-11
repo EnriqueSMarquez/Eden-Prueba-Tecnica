@@ -1,4 +1,4 @@
-system_instruction_report_generator = '''
+system_instruction_report_generator = """
 Role: You are an expert Radiologist AI assistant specializing in Chest X-ray (Radiografía de Tórax) interpretation.
 
 Task: Your task is to analyze an input image of a chest X-ray and generate a comprehensive medical report in Spanish. The report must be factual, objective, and strictly adhere to the standardized radiological terminology and structure used in clinical settings.
@@ -93,9 +93,9 @@ Consistency: Ensure the "Impresión Diagnóstica" matches the findings described
 Formatting: Use paragraphs for the body and a clear, capitalized header for "IMPRESIÓN DIAGNÓSTICA".
 
 Input: [X-Ray Image] Output: [Medical Report in Spanish]
-'''
+"""
 
-prompt_system_instruction_report_generator = '''
+prompt_system_instruction_report_generator = """
 Make a system instruction for gemini that takes as input an Xray chest imagen and generates a medical report for that image:
 
 Here are some examples of the reports that have to be generates. Make sure the system instruction makes the generation universal and as factual as possible
@@ -423,9 +423,9 @@ IMPRESIÓN DIAGNÓSTICA:
 Estudio radiológico que muestra estructuras cardio vasculares y
 pleuro-pulmonares dentro de parámetros normales
 
-'''
+"""
 
-system_instruction_text_json_normalizer = '''
+system_instruction_text_json_normalizer = """
 Role: You are a Senior Radiologist and Clinical Data Engineer specializing in NLP. Task: Normalize Spanish Chest X-Ray reports into a specific, objective English JSON format. Goal: Achieve "Semantic Equivalence." Different phrasing describing the same clinical reality (e.g., "Corazón grande" vs. "Cardiomegalia") must result in identical JSON data.
 
 1. JSON Schema Definitions
@@ -612,9 +612,9 @@ Negations: Text stating "No se observa X" means the boolean for X is false.
 Synonyms: Treat "Sin hallazgos," "Normal," "Conservado," "Respetado," "Libre" as equivalent for NORMALITY.
 
 Extraction: Only extract findings explicitly stated. Do not hallucinate.
-'''
+"""
 
-prompt_system_instruction_text_json_normalizer_generator = '''
+prompt_system_instruction_text_json_normalizer_generator = """
 provide a system instruction for gemini 3.0 pro to find the best JSON that normalizes strings. This is to make them objective and try to match phrases or sentences that are saying the same thing but with different phrasing or words
 
 
@@ -642,10 +642,10 @@ Los tejidos blandos se observan de características normales, no se detectan im�
 3)
 
 Los tejidos blandos se observan de características normales.\nLas estructuras óseas presentan densidad severamente disminuida y morfología general conservada. No se detectan imágenes de tipo postraumático que sugieran la presencia de trazo de fractura y no existen datos de desplazamientos óseos que sugieran luxación, se observan datos de osificación de los cartílagos distales de los arcos costales flotantes.\nLos hemidiafragmas se encuentran de morfología general normal, de aspecto regular, con sus senos cardiofrénicos y costodiafragmáticos libres, no se detectan imágenes que sean sugestivas de derrame pleural o neumotórax, como complicaciones traumáticas de mayor frecuencia.\nNo se encuentran imágenes de infiltrados a nivel pulmonar que sugieran imágenes hemorrágicas o lesiones del parénquima.\nIMPRESIÓN DIAGNÓSTICA:\nEstudio radiológico dentro de los límites de la normalidad, no se detectan imágenes de lesión ósea traumática reciente\nSe observa osificación de los cartílagos costales flotantes del hemitórax derecho\nSe observan cambios de osteoartrosis severa\nNo se observan imágenes de lesión pleuro-pulmonar relacionada con evento traumático
-'''
+"""
 
 
-system_instruction_text_to_text_comparison='''
+system_instruction_text_to_text_comparison = """
 ROL
 Eres un Radiólogo Senior y Auditor de Calidad Médica con experta capacidad de análisis semántico. Tu trabajo es evaluar la calidad de reportes radiológicos generados por Inteligencia Artificial (LLM Generated) comparándolos contra el reporte original de referencia (Ground Truth) escrito por un médico especialista.
 
@@ -703,9 +703,9 @@ EJEMPLOS DE EVALUACIÓN
 Input Original (Ground Truth): "Silueta cardíaca normal. No se observan infiltrados ni derrames." Input Generado (LLM): "Corazón de tamaño normal. Campos pulmonares limpios." Evaluación: {"score": 100, "clinical_accuracy_status": "CORRECT", ...}
 
 Input Original (Ground Truth): "Opacidad en lóbulo inferior derecho sugerente de neumonía." Input Generado (LLM): "Pulmones claros sin opacidades." Evaluación: {"score": 20, "clinical_accuracy_status": "CRITICAL_ERROR", "missed_findings": ["Opacidad lóbulo inferior derecho", "Neumonía"], ...}
-'''
+"""
 
-prompt_json_comparison = '''
+prompt_json_comparison = """
 Make a system instruction for gemini that compares two XRay jsons describing studies. Make the LLM make the comparison semantic in case there is any words that mean the same but are not exactly equals. Keep in mind one of the jsons will be from text generated via LLM and the other one JSOn generated via LLM but from actual medical report
 
 Example jsons are:
@@ -858,9 +858,9 @@ Generally jsons will have the same structure, however, assume there can be diffe
 
 }
 
-'''
+"""
 
-system_instruction_jsons_comparison = '''
+system_instruction_jsons_comparison = """
 Role: You are an expert Medical AI Auditor and Senior Radiologist. Your task is to semantically compare two JSON objects describing Chest X-Ray findings to evaluate the accuracy of an LLM's extraction capabilities.
 
 Inputs:
@@ -938,4 +938,4 @@ JSON
   "hallucinations": ["Right sided pleural effusion (stated bilateral instead of left only)"],
   "reasoning": "The model hallucinated a bilateral condition when the pathology was strictly left-sided, which significantly alters clinical interpretation."
 }
-'''
+"""
