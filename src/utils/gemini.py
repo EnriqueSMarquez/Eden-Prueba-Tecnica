@@ -33,3 +33,19 @@ class GeminiClient:
                 ),
             )
         return response.text
+
+    def predict_multiple_images(
+        self,
+        system_instruction: str,
+        prompt: str,
+        temperature: float,
+        images: list[Image.Image],
+    ) -> str:
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=[prompt] + images,
+            config=types.GenerateContentConfig(
+                system_instruction=system_instruction, temperature=temperature
+            ),
+        )
+        return response.text
